@@ -1,4 +1,4 @@
-name: Build LaTeX document
+name: Release Compiled PDF 
 on: [push]
 jobs:
   build_latex:
@@ -7,12 +7,12 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v2
       - name: Compile LaTeX document
-        uses: dante-ev/latex-action@latest
+        uses: xu-cheng/latex-action@v2
         with:
           root_file: MA0001.tex
 
       - name: Create Release
-       id: create_release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -22,7 +22,7 @@ jobs:
           draft: false
           prerelease: false
 
-     - name: Upload Release Asset
+      - name: Upload Release Asset
         id: upload-release-asset 
         uses: actions/upload-release-asset@v1
         env:
